@@ -33,7 +33,7 @@ public class HelloWorld {
         if (loginUser!=null){
             List<Map<String, Object>> userlist = userMapper.selectAll();
             model.addAttribute("userlist", userlist);
-            return "list";
+            return "index";
         }else {
             model.addAttribute("message", "登录失败!");
             return "login";
