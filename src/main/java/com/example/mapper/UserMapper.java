@@ -20,7 +20,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<Map<String, Object>> selectAll();
+    List<Map<String,Object>> selectAll();
 
-    User regUser(int uerId);
+    User login(User user);
 }

@@ -6,7 +6,9 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="note" jdbcType="VARCHAR" property="note" />
-    <result column="usergroup_id" jdbcType="INTEGER" property="usergroupId" />
+    <result column="usergroupId" jdbcType="INTEGER" property="usergroupid" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Base_Column_List">
     uid, username, sex, note, usergroup_id
@@ -18,10 +20,10 @@
     where uid = #{uid,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultType="java.util.Map">
-    select * from user
+    SELECT * FROM `user`,usergroup WHERE `user`.usergroupId=usergroup.id
   </select>
-  <select id="regUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select * from user where uid = #{uerId,jdbcType=INTEGER}
+  <select id="login" parameterType="com.example.model.User" resultMap="BaseResultMap">
+    select * from `user` where account=#{account} AND `password`=#{password}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
@@ -29,9 +31,11 @@
   </delete>
   <insert id="insert" parameterType="com.example.model.User">
     insert into user (uid, username, sex,
-      note, usergroup_id)
-    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR}, #{usergroupId,jdbcType=INTEGER})
+    note, usergroupId, account,
+    password)
+    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+    #{note,jdbcType=VARCHAR}, #{usergroupid,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR},
+    #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.model.User">
     insert into user
@@ -48,8 +52,14 @@
       <if test="note != null">
         note,
       </if>
-      <if test="usergroupId != null">
-        usergroup_id,
+      <if test="usergroupid != null">
+        usergroupId,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -65,8 +75,14 @@
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
       </if>
-      <if test="usergroupId != null">
-        #{usergroupId,jdbcType=INTEGER},
+      <if test="usergroupid != null">
+        #{usergroupid,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -82,8 +98,14 @@
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
       </if>
-      <if test="usergroupId != null">
-        usergroup_id = #{usergroupId,jdbcType=INTEGER},
+      <if test="usergroupid != null">
+        usergroupId = #{usergroupid,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
     </set>
     where uid = #{uid,jdbcType=INTEGER}
@@ -93,7 +115,9 @@
     set username = #{username,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
-      usergroup_id = #{usergroupId,jdbcType=INTEGER}
+      usergroupId = #{usergroupid,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
 </mapper>
