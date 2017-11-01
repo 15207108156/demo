@@ -1,8 +1,7 @@
 package com.example.controller;
 
+import com.example.mapper.UserMapper;
 import com.example.model.User;
-import com.example.service.UserService;
-import com.example.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -13,12 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @EnableAutoConfiguration
 public class HelloWorld {
-    private final UserServiceImpl userServiceImpl;
-
     @Autowired
-    public HelloWorld(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
-    }
+    private UserMapper userMapper;
+
 
     @RequestMapping("/")
     String home() {
@@ -27,9 +23,9 @@ public class HelloWorld {
 
     @RequestMapping("/reg")
     @ResponseBody
-    Boolean reg(@RequestParam("userId") String userId ){
-        User user=userServiceImpl.regUser(userId);
+    String reg(@RequestParam("userId") int userId ){
+        User user=userMapper.regUser(userId);
         System.out.println(user);
-        return true;
+        return user.toString();
     }
 }
