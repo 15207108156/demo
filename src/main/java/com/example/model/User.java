@@ -1,6 +1,9 @@
 package com.example.model;
 
+import org.thymeleaf.TemplateEngine;
+
 public class User {
+    private TemplateEngine templateEngine;
     private Integer uid;
 
     private String username;
