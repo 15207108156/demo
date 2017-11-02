@@ -32,7 +32,7 @@ $(document).ready(function() {
 </head>
 <body>
 <input type="hidden" id="message" th:value="${message}"/>
-<form method="POST" action="/login">
+<form method="POST" action="/login" onsubmit="return validate();">
  <dl class="admin_login">
   <dt>
    <strong>站点后台管理系统</strong>
