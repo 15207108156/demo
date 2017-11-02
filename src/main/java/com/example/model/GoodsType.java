@@ -1,8 +1,9 @@
 package com.example.model;
 
 public class GoodsType {
+    //    商品类型ID
     private Integer id;
-
+    //    商品类型名称
     private String typename;
 
     public Integer getId() {

@@ -3,18 +3,19 @@ package com.example.model;
 import java.math.BigDecimal;
 
 public class Goods {
+    //    商品ID
     private Integer id;
-
+    //    商品名称
     private String goodsname;
-
+    //    商品价格
     private BigDecimal goodsprice;
-
+    //    商品数量
     private Integer goodsnum;
-
+    //    商品剩余数量
     private Integer goodsremaining;
-
+    //    创建时间
     private String createdate;
-
+    //    商品类型
     private Integer goodstypeid;
 
     public Integer getId() {

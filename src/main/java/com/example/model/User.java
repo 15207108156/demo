@@ -1,21 +1,19 @@
 package com.example.model;
 
-import org.thymeleaf.TemplateEngine;
-
 public class User {
-    private TemplateEngine templateEngine;
+    //    用户ID
     private Integer uid;
-
+    //    用户姓名
     private String username;
-
+    //    用户性别
     private String sex;
-
+    //    用户身份
     private String note;
-
+    //    用户等级
     private Integer usergroupid;
-
+    //    用户账户
     private String account;
-
+    //    用户密码
     private String password;
 
     public Integer getUid() {
