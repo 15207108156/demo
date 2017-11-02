@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.example.model.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="goodsName" jdbcType="VARCHAR" property="goodsname" />
+    <result column="goodsPrice" jdbcType="DECIMAL" property="goodsprice" />
+    <result column="goodsNum" jdbcType="INTEGER" property="goodsnum" />
+    <result column="goodsRemaining" jdbcType="INTEGER" property="goodsremaining" />
+    <result column="createDate" jdbcType="VARCHAR" property="createdate" />
+    <result column="goodsTypeId" jdbcType="INTEGER" property="goodstypeid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goodsName, goodsPrice, goodsNum, goodsRemaining, createDate, goodsTypeId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Goods">
+    insert into goods (id, goodsName, goodsPrice,
+      goodsNum, goodsRemaining, createDate, 
+      goodsTypeId)
+    values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{goodsprice,jdbcType=DECIMAL}, 
+      #{goodsnum,jdbcType=INTEGER}, #{goodsremaining,jdbcType=INTEGER}, #{createdate,jdbcType=VARCHAR}, 
+      #{goodstypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsname != null">
+        goodsName,
+      </if>
+      <if test="goodsprice != null">
+        goodsPrice,
+      </if>
+      <if test="goodsnum != null">
+        goodsNum,
+      </if>
+      <if test="goodsremaining != null">
+        goodsRemaining,
+      </if>
+      <if test="createdate != null">
+        createDate,
+      </if>
+      <if test="goodstypeid != null">
+        goodsTypeId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsnum != null">
+        #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsremaining != null">
+        #{goodsremaining,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypeid != null">
+        #{goodstypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Goods">
+    update goods
+    <set>
+      <if test="goodsname != null">
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        goodsPrice = #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsnum != null">
+        goodsNum = #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsremaining != null">
+        goodsRemaining = #{goodsremaining,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createDate = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypeid != null">
+        goodsTypeId = #{goodstypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Goods">
+    update goods
+    set goodsName = #{goodsname,jdbcType=VARCHAR},
+      goodsPrice = #{goodsprice,jdbcType=DECIMAL},
+      goodsNum = #{goodsnum,jdbcType=INTEGER},
+      goodsRemaining = #{goodsremaining,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=VARCHAR},
+      goodsTypeId = #{goodstypeid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

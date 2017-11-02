@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.example.model.Orders">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orderNo" jdbcType="INTEGER" property="orderno" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="goodsId" jdbcType="INTEGER" property="goodsid" />
+    <result column="orderNum" jdbcType="INTEGER" property="ordernum" />
+    <result column="orderPrice" jdbcType="DECIMAL" property="orderprice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orderNo, userId, goodsId, orderNum, orderPrice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.Orders">
+    insert into orders (id, orderNo, userId,
+      goodsId, orderNum, orderPrice
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderno,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{goodsid,jdbcType=INTEGER}, #{ordernum,jdbcType=INTEGER}, #{orderprice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.Orders">
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderno != null">
+        orderNo,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="ordernum != null">
+        orderNum,
+      </if>
+      <if test="orderprice != null">
+        orderPrice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="orderprice != null">
+        #{orderprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.Orders">
+    update orders
+    <set>
+      <if test="orderno != null">
+        orderNo = #{orderno,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        orderNum = #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="orderprice != null">
+        orderPrice = #{orderprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.Orders">
+    update orders
+    set orderNo = #{orderno,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      orderNum = #{ordernum,jdbcType=INTEGER},
+      orderPrice = #{orderprice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
