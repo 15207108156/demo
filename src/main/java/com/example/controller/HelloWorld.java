@@ -26,10 +26,46 @@ public class HelloWorld {
     String home() {
         return "login";
     }
+
     @RequestMapping("/index")
     String index() {
         return "index";
     }
+    @RequestMapping("/chart")
+    String chart() {
+        return "chart";
+    }
+
+    @RequestMapping("/form-amazeui")
+    String formamazeui() {
+        return "form-amazeui";
+    }
+
+    @RequestMapping("/form-line")
+    String formline() {
+        return "form-line";
+    }
+
+    @RequestMapping("/form-news")
+    String formnews() {
+        return "form-news";
+    }
+
+    @RequestMapping("/form-news-list")
+    String formnewslist() {
+        return "form-news-list";
+    }
+
+    @RequestMapping("/table-font-list")
+    String tablefontlist() {
+        return "table-font-list";
+    }
+
+    @RequestMapping("/table-images-list")
+    String tableimageslist() {
+        return "table-images-list";
+    }
+
 
     @RequestMapping("/login")
     String login(HttpServletRequest request, Model model) {
