@@ -26,6 +26,10 @@ public class HelloWorld {
     String home() {
         return "login";
     }
+    @RequestMapping("/index")
+    String index() {
+        return "index";
+    }
 
     @RequestMapping("/login")
     String login(HttpServletRequest request, Model model) {
@@ -41,39 +45,5 @@ public class HelloWorld {
             model.addAttribute("message", "登录失败!");
             return "login";
         }
-    }
-
-    //    所有数据
-    @RequestMapping("/list")
-    String list(Model model) {
-        List<Map<String, Object>> userlist = userMapper.selectAll();
-        model.addAttribute("userlist", userlist);
-        return "list";
-    }
-
-    //    根据ID删除数据
-    @RequestMapping("/user/userDelete")
-    String userDelete(@RequestParam("uid") int userId, Model model) {
-        userMapper.deleteByPrimaryKey(userId);
-        List<Map<String, Object>> userlist = userMapper.selectAll();
-        model.addAttribute("userlist", userlist);
-        return "list";
-    }
-
-    //    根据ID查询数据并返回到页面
-    @RequestMapping("/user/userEdit")
-    String userEdit(@RequestParam("uid") int userId, Model model) {
-        User user = userMapper.selectByPrimaryKey(userId);
-        model.addAttribute("user", user);
-        return "edit";
-    }
-
-    //    根据ID修改数据
-    @RequestMapping("/user/userUpdate")
-    String userUpdate(@RequestParam("user") User user, Model model) {
-        userMapper.updateByPrimaryKeySelective(user);
-        List<Map<String, Object>> userlist = userMapper.selectAll();
-        model.addAttribute("userlist", userlist);
-        return "list";
     }
 }
